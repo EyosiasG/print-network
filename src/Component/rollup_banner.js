@@ -3,7 +3,7 @@ import '../index.css'
 import 'tailwindcss/tailwind.css';
 import { useState } from 'react';
 import './ImageRadioGroup.css';
-
+import { getDatabase, ref, push } from 'firebase/database';
 
 const RollUpBanner = () => {
     // Implementation of RollUpBanner component
@@ -24,6 +24,33 @@ const RollUpBanner = () => {
     const handleRadioChange = (value) => {
         setSelectedOption(value);
     };
+
+    const handleOrder = async () => {
+        try {
+            if (selectedOption && quantity > 0) {
+                const db = getDatabase();
+                const ordersRef = ref(db, 'Sales');
+
+                // Push new order to the database
+                await push(ordersRef, {
+                    productDetails: selectedOption,
+                    quantity: quantity,
+                });
+
+                // Reset state after placing order
+                setSelectedOption(null);
+                setQuantity(0);
+
+                alert('Order placed successfully!');
+            } else {
+                alert('Please select an item and quantity before placing an order.');
+            }
+        } catch (error) {
+            console.error('Error placing order:', error.message);
+        }
+    };
+
+    // Rest of your component code...
 
     const options = [
         { value: 'image1', label: '3*4', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
@@ -83,8 +110,9 @@ const RollUpBanner = () => {
                         </button>
                         <button
                             className="bg-green-500 text-white p-2 px-4 rounded m-5"
+                            onClick={handleOrder}
                         >
-                            Order
+                        Order
                         </button>
                     </div>
                 </div>
