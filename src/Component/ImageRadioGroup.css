@@ -1,0 +1,17 @@
+/* ImageRadioGroup.css */
+
+/* Add your custom styles here if needed */
+
+/* Style for the selected radio button */
+.radio-option input:checked + img {
+    border: 2px solid blue;
+  }
+  
+  /* Style for the selected radio button label */
+  .radio-option input:checked + img + p {
+    color: blue;
+  }
+
+  .image-option :hover {
+    background-color: #f0f0f0;
+  }
