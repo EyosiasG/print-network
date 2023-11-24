@@ -70,8 +70,7 @@ const ItemsList = () => {
             <Link
               key={itemName}
               to={`/item-details/${itemName}`}
-              className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center transition duration-300 transform hover:scale-105"
-             >
+                   >
               <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-4">
              Click me
              </button>
