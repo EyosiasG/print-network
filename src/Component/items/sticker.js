@@ -66,8 +66,8 @@ const Sticker = () => {
     return (
         <>
             <Navbar />
-            <div className='h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
-                <div className='grid grid-cols-2 p-10 m-44 rounded-md bg-white'>
+            <div className='min-h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
+                <div className='grid grid-cols-2 p-10 m-36 rounded-md bg-white'>
                     <img
                         src="https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg"
                         className="w-auto h-96 mb-2 p-10"
@@ -112,9 +112,9 @@ const Sticker = () => {
                                 onChange={handleSelectChange}
                             >
                                 <option value="">Choose an option</option>
-                                <option value="option1">Glossy</option>
-                                <option value="option2">Paper</option>
-                                <option value="option3">Plastic</option>
+                                <option value="Glossy">Glossy</option>
+                                <option value="Paper">Paper</option>
+                                <option value="Plastic">Plastic</option>
                             </select>
                         </div>
 

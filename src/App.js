@@ -5,7 +5,7 @@ import ItemDetails from './Component/itemDetails'; // Corrected import
 
 function App() {
   return (
-    <div className="App">
+    <div className="App font-montserrat">
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />

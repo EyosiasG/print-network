@@ -61,21 +61,21 @@ const BackdropBanner = () => {
     return (
         <>
             <Navbar />
-            <div className='h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
-                <div className='grid grid-cols-2 p-10 m-44 rounded-md bg-white'>
+            <div className='min-h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
+                <div className='grid grid-cols-2 p-10 m-36 rounded-md bg-white'>
                     <img
                         src="https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg"
                         className="w-auto h-96 mb-2 p-10"
                     />
                     <div className='p-10'>
                         <h2 className='text-3xl font-semibold text-neutral-700 mb-8'>Backdrop Banner</h2>
-                        <p className='text-justify text-sm text-gray-800 mb-5'> Large, eye-catching display typically used as a background 
-                        in various settings, such as events, trade shows, conferences, or photo shoots. Crafted from durable materials like 
-                        vinyl or fabric, these banners showcase vivid graphics, logos, or promotional messages, instantly grabbing attention 
-                        and creating a visually appealing atmosphere. Whether used to enhance a brand presence, provide a professional backdrop 
-                        for interviews and presentations, or simply to add flair to an event space, backdrop banners serve as versatile and impactful 
-                        visual elements. Their portability and easy setup make them a practical choice for transforming any space into a branded or 
-                        thematic environment.</p>
+                        <p className='text-justify text-sm text-gray-800 mb-5'> Large, eye-catching display typically used as a background
+                            in various settings, such as events, trade shows, conferences, or photo shoots. Crafted from durable materials like
+                            vinyl or fabric, these banners showcase vivid graphics, logos, or promotional messages, instantly grabbing attention
+                            and creating a visually appealing atmosphere. Whether used to enhance a brand presence, provide a professional backdrop
+                            for interviews and presentations, or simply to add flair to an event space, backdrop banners serve as versatile and impactful
+                            visual elements. Their portability and easy setup make them a practical choice for transforming any space into a branded or
+                            thematic environment.</p>
                         <hr></hr>
                         <h2 className='text-2xl font-semibold text-neutral-700 mb-3 mt-3'>Select the Size</h2>
                         <div className="flex gap-4">

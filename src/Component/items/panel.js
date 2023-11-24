@@ -62,15 +62,15 @@ const Panel = () => {
     return (
         <>
             <Navbar />
-            <div className='h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
-                <div className='grid grid-cols-2 p-10 m-44 rounded-md bg-white'>
+            <div className='min-h-screen w-screen flex flex-col items-center justify-center bg-slate-100 font-montserrat'>
+                <div className='grid grid-cols-2 p-10 m-36 rounded-md bg-white'>
                     <img
                         src="https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg"
-                        className="w-auto h-96 mb-2 p-10"
+                        className="w-auto h-96 mb-2 p-10 m-20"
                     />
-                    <div className='p-10'>
-                        <h2 className='text-3xl font-semibold text-neutral-700 mb-8'>Panel</h2>
-                        <p className='text-justify text-sm text-gray-800 mb-5'>A flat and often rectangular surface, typically
+                    <div className='p-2'>
+                        <h2 className='text-3xl font-semibold text-neutral-700 mb-8 font-montserrat'>Panel</h2>
+                        <p className='text-justify text-gray-500 mb-5 font-montserrat'>A flat and often rectangular surface, typically
                             made of materials like wood, metal, or plastic, that serves various purposes across different contexts.
                             In the context of events, conferences, or exhibitions, panels can refer to large displays featuring
                             informational content, graphics, or presentations. These can be standalone units or part of a modular system.
@@ -104,7 +104,7 @@ const Panel = () => {
                             </div>
                         </div>
                         <h2 className='text-2xl font-semibold text-neutral-700 mb-3 mt-3'>Select the Quantity</h2>
-                        <div className="flex items-center p-5">
+                        <div className="flex items-center p-2">
                             <button
                                 className="bg-blue-300 text-white px-4 py-2 rounded-l"
                                 onClick={handleDecrement}
