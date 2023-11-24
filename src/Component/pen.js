@@ -9,7 +9,7 @@ import './ImageRadioGroup.css';
 
 const RollUpBanner = () => {
     // Implementation of RollUpBanner component
-
+    const [selectedOption, setSelectedOption] = useState(null);
     const [quantity, setQuantity] = useState(0);
 
     const handleIncrement = () => {
@@ -23,6 +23,9 @@ const RollUpBanner = () => {
     };
 
 
+    const handleRadioChange = (value) => {
+        setSelectedOption(value);
+    };
 
     const options = [
         { value: 'image1', label: '3*4', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
@@ -48,7 +51,14 @@ const RollUpBanner = () => {
                     <div className="flex gap-4">
                         {options.map((option) => (
                             <label key={option.value} className="flex flex-col items-center radio-option">
-                                
+                                <input
+                                    type="radio"
+                                    name="image"
+                                    value={option.value}
+                                    checked={selectedOption === option.value}
+                                    onChange={() => handleRadioChange(option.value)}
+                                    className="hidden"
+                                />
                                 <img
                                     src={option.imageUrl}
                                     alt={option.label}

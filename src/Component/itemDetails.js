@@ -1,14 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import RollUpBanner from '../Component/rollup_banner';
+import Pen from '../Component/pen';
 
 
 const ItemDetails = () => {
     const { itemName } = useParams();
   
     let SelectedItemComponent;
-    if (itemName === "Roll Up Banner(Wide Base)") {
-      SelectedItemComponent = RollUpBanner;
+    if (itemName === "Pen)") {
+      SelectedItemComponent = Pen;
     } else {
      // SelectedItemComponent = DefaultItem;
     }
