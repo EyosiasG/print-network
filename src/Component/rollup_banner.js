@@ -1,4 +1,6 @@
 import React from 'react';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../index.css'
 import 'tailwindcss/tailwind.css';
 import { useState } from 'react';
@@ -33,7 +35,7 @@ const RollUpBanner = () => {
 
     return (
         <div>
-            <div className='grid grid-cols-2 pl-96 pr-80'>
+            <div className='grid grid-cols-2 pt-4 pl-96 pr-80' style={{marginTop:'35px'}}>
                 <img
                     src="https://graphicsfamily.com/wp-content/uploads/edd/2021/06/Free-Editable-Photoshop-Roll-Up-Banner-Design-1180x664.jpg"
                     className="w-80 h-80 mb-2"
