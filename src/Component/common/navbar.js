@@ -2,8 +2,7 @@ const Navbar = () => {
     return (
         <div class="flex justify-between items-center border-b border-gray-300 flex-wrap bg-white p-4">
             <div class="flex items-center">
-                <img src="https://tailwindflex.com/public/images/logo.svg" class="w-10 h-10" />
-                <h2 class="font-bold text-2xl text-purple-600">PrintNetwork</h2>
+                <h2 class="font-bold text-2xl text-blue-600">PrintNetwork</h2>
             </div>
             <div class="relative flex items-center">
                 <input type="text" placeholder="Search" class="border border-gray-200 rounded-md py-1 px-2" />

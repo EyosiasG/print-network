@@ -38,6 +38,8 @@ const Sticker = () => {
 
                 // Push new order to the database
                 await push(ordersRef, {
+                    productName:"Roll Up(Wide Base) Banner",
+                    productImage:"https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg",
                     productDetails: `${selectedOption}, ${selectedDropDownOption}`,
                     quantity: quantity,
                 });

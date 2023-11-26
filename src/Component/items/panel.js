@@ -32,6 +32,8 @@ const Panel = () => {
 
                 // Push new order to the database
                 await push(ordersRef, {
+                    productName:"Panel",
+                    productImage:"https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg",
                     productDetails: `${length} x ${width}`,
                     quantity: quantity,
                 });
@@ -63,7 +65,7 @@ const Panel = () => {
         <>
             <Navbar />
             <div className='min-h-screen w-screen flex flex-col items-center justify-center bg-slate-100 font-montserrat'>
-                <div className='grid grid-cols-2 p-10 m-36 rounded-md bg-white'>
+                <div className='grid grid-cols-2 p-10 mx-36 my-14  rounded-md bg-white'>
                     <img
                         src="https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg"
                         className="w-auto h-96 mb-2 p-10 m-20"

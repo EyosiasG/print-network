@@ -33,6 +33,8 @@ const BackdropBanner = () => {
 
                 // Push new order to the database
                 await push(ordersRef, {
+                    productName:"Backdrop Banner",
+                    productImage:"https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg",
                     productDetails: selectedOption,
                     quantity: quantity,
                 });
@@ -53,23 +55,23 @@ const BackdropBanner = () => {
     // Rest of your component code...
 
     const options = [
-        { value: 'image1', label: '3*4', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
-        { value: 'image2', label: '3*5', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
-        { value: 'image3', label: '4*4', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
+        { value: '3x4', label: '3 x 4', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
+        { value: '3x5', label: '3 x 5', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
+        { value: '4x4', label: '4 x 4', imageUrl: 'https://us.123rf.com/450wm/daboost/daboost1803/daboost180300021/97500228-blank-white-a4-paper-sheet-mockup-template-isolated-on-dark-grey-background.jpg?ver=6' },
     ];
 
     return (
         <>
             <Navbar />
             <div className='min-h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
-                <div className='grid grid-cols-2 p-10 m-36 rounded-md bg-white'>
+                <div className='grid grid-cols-2 p-10 mx-36 my-14 rounded-md bg-white'>
                     <img
                         src="https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg"
-                        className="w-auto h-96 mb-2 p-10"
+                        className="w-auto h-96 mb-2 p-10 m-20"
                     />
                     <div className='p-10'>
                         <h2 className='text-3xl font-semibold text-neutral-700 mb-8'>Backdrop Banner</h2>
-                        <p className='text-justify text-sm text-gray-800 mb-5'> Large, eye-catching display typically used as a background
+                        <p className='text-justify text-gray-500 mb-5'> Large, eye-catching display typically used as a background
                             in various settings, such as events, trade shows, conferences, or photo shoots. Crafted from durable materials like
                             vinyl or fabric, these banners showcase vivid graphics, logos, or promotional messages, instantly grabbing attention
                             and creating a visually appealing atmosphere. Whether used to enhance a brand presence, provide a professional backdrop
@@ -99,7 +101,7 @@ const BackdropBanner = () => {
                             ))}
                         </div>
                         <h2 className='text-2xl font-semibold text-neutral-700 mb-3 mt-3'>Select the Quantity</h2>
-                        <div className="flex items-center p-5">
+                        <div className="flex items-center">
                             <button
                                 className="bg-blue-300 text-white px-4 py-2 rounded-l"
                                 onClick={handleDecrement}
@@ -114,10 +116,10 @@ const BackdropBanner = () => {
                                 +
                             </button>
                             <button
-                                className="bg-red-500 text-white p-2 px-20 rounded ml-20 text-sm"
+                                className="bg-red-500 text-white py-2 px-20 rounded ml-20"
                                 onClick={handleOrder}
                             >
-                                Order
+                                ORDER
                             </button>
                         </div>
                     </div>
