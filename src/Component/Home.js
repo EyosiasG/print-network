@@ -4,7 +4,7 @@ import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, get } from 'firebase/database';
 import Navbar from './common/navbar';
 import 'tailwindcss/tailwind.css';
-
+import Footer from './common/footer';
 import { Link } from 'react-router-dom';
 
 
@@ -52,27 +52,28 @@ const ItemsList = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
           {Object.entries(items).map(([itemName, imageLink]) => (
             <div
               key={itemName}
               to={`/item-details/${itemName}`}
-              className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center transition duration-300 transform hover:scale-105"
+              className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
             >
               {/* Clickable item with details */}
               <img
                 src={imageLink}
                 alt={`${itemName} Image`}
-                className="w-64 h-64 object-cover mb-4"
+                className="w-full h-48 object-cover mb-4"
               />
-              <strong className="text-xl text-center">{itemName}</strong>
               <Link
                 key={itemName}
                 to={`/item-details/${itemName}`}
               >
-                <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-4">
-                  Click me
-                </button>
+              <h1 className="text-xl mb-2">{itemName}</h1>
+              
+                <h1 className="font-bold text-gray-500">
+                  SHOP NOW 
+                </h1>
               </Link>
             </div>
           ))}
@@ -125,7 +126,9 @@ export const Home = () => {
         <HeroSection />
         <ProductSection />
         <ItemsList />
-      </div>
+      
+      </div>  
+      <Footer />
     </>
 
   );
