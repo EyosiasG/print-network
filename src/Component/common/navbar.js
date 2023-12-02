@@ -1,11 +1,17 @@
+import { useState } from "react";
+
 const Navbar = () => {
+    const [searchText,setSearchText]= useState([]);
+    localStorage.setItem('searchText',JSON.stringify(searchText))
     return (
         <div class="flex justify-between items-center border-b border-gray-300 flex-wrap bg-white p-4">
             <div class="flex items-center">
                 <h2 class="font-bold text-2xl text-blue-600">PrintNetwork</h2>
             </div>
             <div class="relative flex items-center w-auto">
-                <input type="text" placeholder="Search" class="border border-gray-200 rounded-md py-1 px-2 w-auto " />
+                <input type="text" placeholder="Search" class="border border-gray-200 rounded-md py-1 px-2 w-auto " 
+                              value={searchText}
+                              onChange={(e) => setSearchText(e.target.value)} />
                 <svg class="absolute right-2 h-6 w-6 text-gray-400 hover:text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

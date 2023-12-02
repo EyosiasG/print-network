@@ -121,9 +121,10 @@ export const Home = () => {
   return (
     <>
       <Navbar />
+      <HeroSection />
       <div className="bg-gray-100 p-10">
 
-        <HeroSection />
+        
         <ProductSection />
         <ItemsList />
       
