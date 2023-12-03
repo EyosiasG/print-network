@@ -18,6 +18,9 @@ const ItemDetails = () => {
     }else if(itemName === "Sticker"){
       SelectedItemComponent = Sticker
     }
+    else{
+      SelectedItemComponent = Sticker;
+    }
   
     console.log('itemName:', itemName);
     console.log('SelectedItemComponent:', SelectedItemComponent);
