@@ -22,9 +22,12 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
 
+// ... (other imports)
+
 const ItemsList = () => {
   const [items, setItems] = useState({});
   const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,12 +46,54 @@ const ItemsList = () => {
       }
     };
 
-    fetchData();
-  }, [db]); // Include db as a dependency to avoid useEffect warnings
+    const fetchFilteredData = async () => {
+      try {
+        const itemsRef = ref(db, 'Items');
+        const snapshot = await get(itemsRef);
+
+        if (snapshot.exists()) {
+          setItems(Object.fromEntries(
+            Object.entries(snapshot.val()).filter(([itemName, _]) =>
+              filter === 0 || (filter === 1 && itemName === 'Mug')
+            )
+          ));
+        }
+
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching data:', error.message);
+        setLoading(false);
+      }
+    };
+
+    if (filter === 0) {
+      fetchData();
+    } else if (filter === 1) {
+      fetchFilteredData();
+    }
+  }, [db, filter]);
+
+  const handleFilter = (e) => {
+    setFilter(e);
+  }
 
   return (
-
     <div className="container mx-auto ">
+      <section id="product">
+        <div className="col-12">
+          <div className="Dtit text-center" >
+            <p className="mb-3 pt-4" style={{ fontSize: '38px', fontFamily: 'Montserrat' }}>Exclusive Products</p>
+          </div>
+          <div className="productHeading text-center" style={{ fontSize: '18px', marginBottom: '20px' }}>
+            <ul className="list-unstyled d-flex justify-content-center">
+              <li><button className="text-decoration-none text-danger fw-semibold" onClick={() => handleFilter(0)}>All</button></li>
+              <li><button className="text-decoration-none fw-semibold text-black" onClick={() => handleFilter(1)}>Paper</button></li>
+              <li><a href="#" className="text-decoration-none fw-semibold text-black" onClick={() => handleFilter(0)}>LargeForm</a></li>
+              <li><a href="#" className="text-decoration-none fw-semibold text-black">GiveWay</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -69,20 +114,22 @@ const ItemsList = () => {
                 key={itemName}
                 to={`/item-details/${itemName}`}
               >
-              <h1 className="text-xl mb-2">{itemName}</h1>
-              
+                <h1 className="text-xl mb-2">{itemName}</h1>
                 <h1 className="font-bold text-gray-500">
-                  SHOP NOW 
+                  SHOP NOW
                 </h1>
               </Link>
             </div>
           ))}
-          <navbar />
+
         </div>
       )}
     </div>
-  )
+  );
 }
+
+// ... (rest of the code)
+
 const HeroSection = () => {
   return (
     <section className="hero p-10">
@@ -93,7 +140,7 @@ const HeroSection = () => {
   );
 };
 
-const ProductSection = () => {
+/*const ProductSection = () => {
   return (
     <section id="product">
       <div className="col-12">
@@ -102,8 +149,8 @@ const ProductSection = () => {
         </div>
         <div className="productHeading text-center" style={{ fontSize: '18px', marginBottom: '20px' }}>
           <ul className="list-unstyled d-flex justify-content-center">
-            <li><a href="#" className="text-decoration-none text-danger fw-semibold">All</a></li>
-            <li><a href="#" className="text-decoration-none fw-semibold text-black">Paper</a></li>
+            <li><button className="text-decoration-none text-danger fw-semibold" onClick={handleFilter(0)}>All</button></li>
+            <li><button className="text-decoration-none fw-semibold text-black" onClick={handleFilter(1)}>Paper</button></li>
             <li><a href="#" className="text-decoration-none fw-semibold text-black">LargeForm</a></li>
             <li><a href="#" className="text-decoration-none fw-semibold text-black">GiveWay</a></li>
           </ul>
@@ -111,9 +158,9 @@ const ProductSection = () => {
       </div>
     </section>
   );
-};
+};*/
 
-export { HeroSection, ProductSection };
+export { HeroSection };
 
 
 
@@ -125,7 +172,7 @@ export const Home = () => {
       <div className="bg-gray-100 p-10">
 
         
-        <ProductSection />
+      
         <ItemsList />
       
       </div>  
