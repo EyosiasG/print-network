@@ -30,74 +30,32 @@ const ItemsList = () => {
   const [filter, setFilter] = useState(0);
   const [data, setData] = useState([]);
 
+
   useEffect(() => {
-    // const fetchData = async () => {
-    //   try {
-    //     const itemsRef = ref(db, 'Items');
-    //     const snapshot = await get(itemsRef);
 
-    //     if (snapshot.exists()) {
-    //       setItems(snapshot.val());
-    //     }
+      // Reference to your specific table or collection
+      const tableRef = ref(db, 'Items');
 
-    //     setLoading(false);
-    //   } catch (error) {
-    //     console.error('Error fetching data:', error.message);
-    //     setLoading(false);
-    //   }
-    // };
+      // Use onValue to listen for changes and get initial data
+      const unsubscribe = onValue(tableRef, (snapshot) => {
+          const data = snapshot.val();
+          if (data) {
+              // Convert the data object to an array if needed
+              const dataArray = Object.entries(data).map(([key, value]) => ({
+                  id: key,
+                  ...value,
+              }));
+              setData(dataArray);
+              console.log(dataArray);
+          } else {
+              setData([]);
+          }
+      });
 
-
-    // Reference to your specific table or collection
-    const tableRef = ref(db, 'Items');
-
-    // Use onValue to listen for changes and get initial data
-    const fetchData = onValue(tableRef, (snapshot) => {
-      const data = snapshot.val();
-      if (data) {
-        // Convert the data object to an array if needed
-        const dataArray = Object.entries(data).map(([key, value]) => ({
-          id: key,
-          ...value,
-        }));
-        setData(dataArray);
-        console.log(dataArray);
-      } else {
-        setData([]);
-      }
-    });
-
-    const fetchFilteredData = async () => {
-      try {
-        const itemsRef = ref(db, 'Items');
-        const snapshot = await get(itemsRef);
-
-        if (snapshot.exists()) {
-          setItems(Object.fromEntries(
-            Object.entries(snapshot.val()).filter(([itemName, _]) =>
-              filter === 0 || (filter === 1 && itemName === 'Mug')
-            )
-          ));
-        }
-
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-        setLoading(false);
-      }
-    };
-
-    if (filter === 0) {
-      fetchData();
-    } else if (filter === 1) {
-      fetchFilteredData();
-    }
-  }, [db, filter]);
-
-  const handleFilter = (e) => {
-    setFilter(e);
-  }
-
+      // Clean up the subscription when the component unmounts
+      return () => unsubscribe();
+  }, []);
+  //// Include db as a dependency to avoid useEffect warnings
   return (
     <div className="container mx-auto ">
       <section id="product">
@@ -107,46 +65,44 @@ const ItemsList = () => {
           </div>
           <div className="productHeading text-center" style={{ fontSize: '18px', marginBottom: '20px' }}>
             <ul className="list-unstyled d-flex justify-content-center">
-              <li><button className="text-decoration-none text-danger fw-semibold" onClick={() => handleFilter(0)}>All</button></li>
-              <li><button className="text-decoration-none fw-semibold text-black" onClick={() => handleFilter(1)}>Paper</button></li>
-              <li><a href="#" className="text-decoration-none fw-semibold text-black" onClick={() => handleFilter(0)}>LargeForm</a></li>
+              <li><button className="text-decoration-none text-danger fw-semibold">All</button></li>
+              <li><button className="text-decoration-none fw-semibold text-black">Paper</button></li>
+              <li><a href="#" className="text-decoration-none fw-semibold text-black">LargeForm</a></li>
               <li><a href="#" className="text-decoration-none fw-semibold text-black">GiveWay</a></li>
             </ul>
           </div>
         </div>
       </section>
-      {//loading
-        loading ? (
-
-          <p>Loading...</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
-            {data.map((item) => (
-              <div
+      {!loading ? (
+        <p>Loading...</p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
+          {data.map((item) => (
+            <div
+              key={item.name}
+              to={`/item-details/${item.name}`}
+              className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
+            >
+              {/* Clickable item with details */}
+              <img
+                src={item.Image}
+                alt={`${item.name} Image`}
+                className="w-full h-48 object-cover mb-4"
+              />
+              <Link
                 key={item.name}
                 to={`/item-details/${item.name}`}
-                className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
               >
-                {/* Clickable item with details */}
-                <img
-                  src={item.Image}
-                  alt={`${item.Image} Image`}
-                  className="w-full h-48 object-cover mb-4"
-                />
-                <Link
-                  key={item.name}
-                  to={`/item-details/${item.name}`}
-                >
-                  <h1 className="text-xl mb-2">{item.name}</h1>
-                  <h1 className="font-bold text-gray-500">
-                    SHOP NOW
-                  </h1>
-                </Link>
-              </div>
-            ))}
+                <h1 className="text-xl mb-2">{item.name}</h1>
+                <h1 className="font-bold text-gray-500">
+                  SHOP NOW
+                </h1>
+              </Link>
+            </div>
+          ))}
 
-          </div>
-        )}
+        </div>
+      )}
     </div>
   );
 }
@@ -194,11 +150,11 @@ export const Home = () => {
       <HeroSection />
       <div className="bg-gray-100 p-10">
 
-
-
+        
+      
         <ItemsList />
-
-      </div>
+      
+      </div>  
       <Footer />
     </>
 
