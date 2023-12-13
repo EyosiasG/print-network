@@ -12,7 +12,7 @@ const ItemsList = () => {
     useEffect(() => {
 
         // Reference to your specific table or collection
-        const tableRef = ref(db, 'Sales');
+        const tableRef = ref(db, 'Items');
 
         // Use onValue to listen for changes and get initial data
         const unsubscribe = onValue(tableRef, (snapshot) => {
@@ -39,15 +39,15 @@ const ItemsList = () => {
             {data.map((item) => (
                 <>
                     <div className="grid grid-cols-3 mt-5 mb-3 px-36">
-                        <img className="w-64 h-auto col-span-1" src={item.productImage} />
+                        <img className="w-64 h-auto col-span-1" src={item.Image} />
                         <div className="flex flex-col col-span-1">
                             <p className="text-gray-700 font-semibold">Product Details</p>
-                            <p>{item.productName}</p>
-                            <p>{item.productDetails}</p>
+                            <p>{item.name}</p>
+                            <p>{item.Type}</p>
                         </div>
                         <div className="flex flex-col col-span-1">
                             <p className="text-gray-700 font-semibold">Quantity</p>
-                            <p className="font-semibold p-2">{item.quantity}</p>
+                            <p className="font-semibold p-2">{item.name}</p>
                         </div>
                     </div>
                     <hr />

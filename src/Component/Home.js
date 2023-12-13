@@ -1,7 +1,7 @@
 import '../index.css'
 import React, { useState, useEffect } from 'react';
 import { initializeApp } from 'firebase/app';
-import { getDatabase, ref, get } from 'firebase/database';
+import { getDatabase, ref, get, onValue } from 'firebase/database';
 import Navbar from './common/navbar';
 import 'tailwindcss/tailwind.css';
 import Footer from './common/footer';
@@ -28,23 +28,44 @@ const ItemsList = () => {
   const [items, setItems] = useState({});
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState(0);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const itemsRef = ref(db, 'Items');
-        const snapshot = await get(itemsRef);
+    // const fetchData = async () => {
+    //   try {
+    //     const itemsRef = ref(db, 'Items');
+    //     const snapshot = await get(itemsRef);
 
-        if (snapshot.exists()) {
-          setItems(snapshot.val());
-        }
+    //     if (snapshot.exists()) {
+    //       setItems(snapshot.val());
+    //     }
 
-        setLoading(false);
-      } catch (error) {
-        console.error('Error fetching data:', error.message);
-        setLoading(false);
+    //     setLoading(false);
+    //   } catch (error) {
+    //     console.error('Error fetching data:', error.message);
+    //     setLoading(false);
+    //   }
+    // };
+
+
+    // Reference to your specific table or collection
+    const tableRef = ref(db, 'Items');
+
+    // Use onValue to listen for changes and get initial data
+    const fetchData = onValue(tableRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        // Convert the data object to an array if needed
+        const dataArray = Object.entries(data).map(([key, value]) => ({
+          id: key,
+          ...value,
+        }));
+        setData(dataArray);
+        console.log(dataArray);
+      } else {
+        setData([]);
       }
-    };
+    });
 
     const fetchFilteredData = async () => {
       try {
@@ -95,37 +116,37 @@ const ItemsList = () => {
         </div>
       </section>
       {//loading
-      loading ? (
-        
-        <p>Loading...</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
-          {Object.entries(items).map(([itemName, imageLink]) => (
-            <div
-              key={itemName}
-              to={`/item-details/${itemName}`}
-              className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
-            >
-              {/* Clickable item with details */}
-              <img
-                src={imageLink}
-                alt={`${itemName} Image`}
-                className="w-full h-48 object-cover mb-4"
-              />
-              <Link
-                key={itemName}
-                to={`/item-details/${itemName}`}
-              >
-                <h1 className="text-xl mb-2">{itemName}</h1>
-                <h1 className="font-bold text-gray-500">
-                  SHOP NOW
-                </h1>
-              </Link>
-            </div>
-          ))}
+        loading ? (
 
-        </div>
-      )}
+          <p>Loading...</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
+            {data.map((item) => (
+              <div
+                key={item.name}
+                to={`/item-details/${item.name}`}
+                className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
+              >
+                {/* Clickable item with details */}
+                <img
+                  src={item.Image}
+                  alt={`${item.Image} Image`}
+                  className="w-full h-48 object-cover mb-4"
+                />
+                <Link
+                  key={item.name}
+                  to={`/item-details/${item.name}`}
+                >
+                  <h1 className="text-xl mb-2">{item.name}</h1>
+                  <h1 className="font-bold text-gray-500">
+                    SHOP NOW
+                  </h1>
+                </Link>
+              </div>
+            ))}
+
+          </div>
+        )}
     </div>
   );
 }
@@ -173,11 +194,11 @@ export const Home = () => {
       <HeroSection />
       <div className="bg-gray-100 p-10">
 
-        
-      
+
+
         <ItemsList />
-      
-      </div>  
+
+      </div>
       <Footer />
     </>
 
