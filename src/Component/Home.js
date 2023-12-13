@@ -94,7 +94,9 @@ const ItemsList = () => {
           </div>
         </div>
       </section>
-      {loading ? (
+      {//loading
+      loading ? (
+        
         <p>Loading...</p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
