@@ -21,13 +21,18 @@ const SearchResults = () => {
 
                 if (snapshot.exists()) {
                     setItems(snapshot.val());
+                    const data = snapshot.val();
 
                     // Filter items based on the search query
-                    const filteredResults = Object.entries(snapshot.val()).filter(([itemName, imageLink]) =>
-                        itemName.toLowerCase().includes(query.toLowerCase())
-                    );
+                    const filteredResults = Object.entries(data).filter(([key, value]) =>
+                        value.name.toLowerCase().includes(query.toLowerCase())
+                    ).map(([key, value]) => ({
+                        id: key,
+                        ...value,
+                      }));
 
                     setSearchResults(filteredResults);
+                    console.log(filteredResults);
                 }
             } catch (error) {
                 console.error('Error fetching data from Firebase:', error);
@@ -46,18 +51,18 @@ const SearchResults = () => {
                 <h1 className='text-gray-500 text-xl font-semibold mt-5 p-10 mx-10'>Search Results: </h1>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
                   
-                    {searchResults.map(([itemName, imageLink]) => (
+                    {searchResults.map((item) => (
                         <div
-                            key={itemName}
+                            key={item.name}
                             className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
                         >
                             <img
-                                src={imageLink}
-                                alt={`${itemName} Image`}
+                                src={item.Image}
+                                alt={`${item.name} Image`}
                                 className="w-full h-48 object-cover mb-4"
                             />
-                            <Link to={`/item-details/${itemName}`}>
-                                <h1 className="text-xl mb-2">{itemName}</h1>
+                            <Link to={`/item-details/${item.name}`}>
+                                <h1 className="text-xl mb-2">{item.name}</h1>
                                 <h1 className="font-bold text-gray-500">SHOP NOW</h1>
                             </Link>
                         </div>
