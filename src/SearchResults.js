@@ -21,18 +21,13 @@ const SearchResults = () => {
 
                 if (snapshot.exists()) {
                     setItems(snapshot.val());
-                    const data = snapshot.val();
 
                     // Filter items based on the search query
-                    const filteredResults = Object.entries(data).filter(([key, value]) =>
-                        value.name.toLowerCase().includes(query.toLowerCase())
-                    ).map(([key, value]) => ({
-                        id: key,
-                        ...value,
-                      }));
+                    const filteredResults = Object.entries(snapshot.val()).filter(([itemName, imageLink]) =>
+                        itemName.toLowerCase().includes(query.toLowerCase())
+                    );
 
                     setSearchResults(filteredResults);
-                    console.log(filteredResults);
                 }
             } catch (error) {
                 console.error('Error fetching data from Firebase:', error);
@@ -49,25 +44,29 @@ const SearchResults = () => {
             <Navbar />
             <div className="container mx-auto">
                 <h1 className='text-gray-500 text-xl font-semibold mt-5 p-10 mx-10'>Search Results: </h1>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
-                  
-                    {searchResults.map((item) => (
-                        <div
-                            key={item.name}
-                            className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
-                        >
-                            <img
-                                src={item.Image}
-                                alt={`${item.name} Image`}
-                                className="w-full h-48 object-cover mb-4"
-                            />
-                            <Link to={`/item-details/${item.name}`}>
-                                <h1 className="text-xl mb-2">{item.name}</h1>
-                                <h1 className="font-bold text-gray-500">SHOP NOW</h1>
-                            </Link>
-                        </div>
-                    ))}
-                </div>
+                
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
+        {searchResults.map((item) => (
+          <div className="card" >
+          <img className="img-fluid" style={{height: '75%'}} src={item.Image} alt="..."/>
+          <div className="card-body">
+            <p className="text-center " style={{ fontFamily : 'Montserrat', fontSize: '15px' }}>{item.name}</p>
+            <div className="text-center pt-2">
+            <div className='card-footer'>
+            <Link
+                key={item.name}
+                to={`/item-details/${item.name}`}
+                className="btn btn-m btn-success"
+                style={{width : '200px'}}
+              >
+              Details
+              </Link>
+                   </div>
+    
+  
+        ))}
+
+      </div>
             </div>
         </>
 

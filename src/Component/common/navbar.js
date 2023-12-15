@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [searchInput, setSearchInput] = useState('');
@@ -14,37 +15,50 @@ const Navbar = () => {
         navigate(`/search-results?query=${encodeURIComponent(searchInput)}`);
     };
     return (
-        <div class="flex justify-between items-center border-b border-gray-300 flex-wrap bg-white p-4">
-            <div class="flex items-center">
-                <h2 class="font-bold text-2xl text-blue-600">PrintNetwork</h2>
+
+
+
+        <nav className="navbar navbar-expand-lg navbar-light bg-white border-bottom border-top" style={{ width: '100%' }}>
+        <div className="container">
+          <Link className="navbar-brand fs-2 fw-bold" to="/">
+            <span style={{ color: '#f54242' }}></span> Print Network
+          </Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="" id="navbarSupportedContent">
+          <ul className="navbar-nav mb-lg-0 text-center">
+            <div className="Search" style={{  paddingLeft: '3rem' }}>
+              <li className="nav-item">
+                <form className="d-flex p-1">
+                  <input type="text" style={{ width: '35rem', paddingLeft: '3rem' }} className="form-control p-1"  value={searchInput}
+                    onChange={handleSearchInputChange} placeholder="Search" aria-label="Search" aria-describedby="basic-addon1" />
+                  <button className="btn btn-outline-success"   onClick={handleSearchButtonClick} type="button">Search</button>
+                </form>
+              </li>
             </div>
-            <div class="relative flex items-center w-auto">
-                <input type="text"
-                    placeholder="Search"
-                    value={searchInput}
-                    onChange={handleSearchInputChange}
-                    className="border border-gray-200 rounded-md py-1 px-2 w-auto" />
-                <button
-                    onClick={handleSearchButtonClick}
-                    className="ml-2 p-2 bg-blue-500 text-white rounded"
-                >
-                    Search
-                </button>
-            </div>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-dropdown">
-                <ul class="flex flex-col font-medium md:p-0 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Home</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</a>
-                    </li>
-                    <li>
-                        <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
-                    </li>
+              <li className="nav-item dropdown" style={{  paddingLeft: '5rem' }}>
+                <a className="nav-link dropdown-toggle fw-semibold text-uppercase me-1 text-danger" href="#" id="homeDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Home
+                </a>
+                <ul className="dropdown-menu" aria-labelledby="homeDropdown">
+                  <li><Link className="dropdown-item" to="/details">Option 1</Link></li>
+                  <li><Link className="dropdown-item" to="/login">Option 2</Link></li>
+                  <li><Link className="dropdown-item" to="/registration">Option 3</Link></li>
                 </ul>
-            </div>
+              </li>
+              <li>
+                <Link className="cart-link" to="/cart">
+                  🛒 Cart
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+
+
+        
     );
 }
 

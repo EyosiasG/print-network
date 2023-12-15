@@ -14,6 +14,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/item-details/:itemName" element={<ItemDetails />} />
           <Route path="/search-results" element={<SearchResults />} />
+          <Route path="/cart" element={<MyBasket />} />
+    
+
         </Routes>
       </Router>
     </div>

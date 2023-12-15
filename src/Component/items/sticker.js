@@ -68,11 +68,11 @@ const Sticker = () => {
     return (
         <>
             <Navbar />
-            <div className='min-h-screen w-screen flex flex-col items-center justify-center bg-slate-100'>
-                <div className='grid grid-cols-2 p-10 m-36 rounded-md bg-white'>
+            <div className='min-h-screen w-screen flex flex-col items-center justify-center '>
+                <div className='grid grid-cols-2 p-10 m-36 pt-10 mt-5 rounded-md bg-white shadow-lg'>
                     <img
                         src="https://www.laboratory424.com/files/projects/ppstr/ppstr-small.jpg"
-                        className="w-auto h-96 mb-2 p-10"
+                        className="w-auto h-156 mb-2 p-1 rounded-md"
                     />
                     <div className='p-10'>
                         <h2 className='text-3xl font-semibold text-neutral-700 mb-8'>Sticker</h2>
@@ -83,7 +83,7 @@ const Sticker = () => {
                             and other personal items, serving as a popular means of customization and self-expression. Businesses utilize stickers for
                             promotional purposes, and they are also frequently employed in art projects, scrapbooking, and as a fun and accessible way to
                             add flair to everyday items.</p>
-                        <hr></hr>
+                        <hr className='my-5'></hr>
                         <h2 className='text-2xl font-semibold text-neutral-700 mb-3 mt-3'>Select the Size</h2>
                         <div className="flex gap-4">
                             {options.map((option) => (
@@ -99,7 +99,7 @@ const Sticker = () => {
                                     <img
                                         src={option.imageUrl}
                                         alt={option.label}
-                                        className="w-24 h-24 mb-2 cursor-pointer image-option"
+                                        className="w-24 h-24 mb-2 cursor-pointer image-option rounded-md"
                                     />
                                     <p className="text-center">{option.label}</p>
                                 </label>
@@ -123,20 +123,20 @@ const Sticker = () => {
                         <h2 className='text-2xl font-semibold text-neutral-700 mb-3 mt-3'>Select the Quantity</h2>
                         <div className="flex items-center p-5">
                             <button
-                                className="bg-blue-300 text-white px-4 py-2 rounded-l"
+                                className="bg-blue-500 text-white px-4 py-2 rounded-l"
                                 onClick={handleDecrement}
                             >
                                 -
                             </button>
                             <span className="text-xl font-semibold px-4">{quantity}</span>
                             <button
-                                className="bg-blue-300 text-white px-4 py-2 rounded-r"
+                                className="bg-blue-500 text-white px-4 py-2 rounded-r"
                                 onClick={handleIncrement}
                             >
                                 +
                             </button>
                             <button
-                                className="bg-red-500 text-white p-2 px-20 rounded ml-20 text-sm"
+                                className="bg-red-600 text-white p-2 px-20 rounded ml-20 text-sm"
                                 onClick={handleOrder}
                             >
                                 Order

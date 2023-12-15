@@ -95,34 +95,34 @@ const ItemsList = () => {
               <li><button className="text-decoration-none text-danger fw-semibold" onClick={() => handleFilter(0)}>All</button></li>
               <li><button className="text-decoration-none fw-semibold text-black" onClick={() => handleFilter(1)}>Paper</button></li>
               <li><button className="text-decoration-none fw-semibold text-black" onClick={() => handleFilter(2)}>LargeForm</button></li>
-              <li><a href="#" className="text-decoration-none fw-semibold text-black">GiveWay</a></li>
+              <li><a className="text-decoration-none fw-semibold text-black"onClick={() => handleFilter(3)}>GiveWay</a></li>
             </ul>
           </div>
         </div>
       </section>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-10 mx-10">
         {data.map((item) => (
-          <div
-            key={item.name}
-            to={`/item-details/${item.name}`}
-            className="bg-white rounded-lg shadow-md flex flex-col items-start justify-center transition duration-300 transform hover:scale-105 "
-          >
-            {/* Clickable item with details */}
-            <img
-              src={item.Image}
-              alt={`${item.name} Image`}
-              className="w-full h-48 object-cover mb-4"
-            />
+          <div className="card" >
+          <img className="img-fluid" style={{height: '75%'}} src={item.Image} alt="..."/>
+          <div className="card-body">
+            <p className="text-center " style={{ fontFamily : 'Montserrat', fontSize: '15px' }}>{item.name}</p>
+            <div className="text-center pt-2">
+            <div className='card-footer'>
             <Link
-              key={item.name}
-              to={`/item-details/${item.name}`}
-            >
-              <h1 className="text-xl mb-2">{item.name}</h1>
-              <h1 className="font-bold text-gray-500">
-                SHOP NOW
-              </h1>
-            </Link>
+                key={item.name}
+                to={`/item-details/${item.name}`}
+                className="btn btn-m btn-success"
+                style={{width : '200px'}}
+              >
+              Details
+              </Link>
+           
+            </div>
+               </div>
           </div>
+        </div>
+    
+  
         ))}
 
       </div>

@@ -105,7 +105,8 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
+    h1 {
+      font-family: Montserrat;
         color: #333;
         font-size: 24px;
     }
